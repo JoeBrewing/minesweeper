@@ -93,11 +93,19 @@ class Grid
     grid[y.to_i - 1][x.to_i - 1].set_clicked
   end
 
+  # Initializes the squares that are adjacent to a bomb.
   def assign_bomb_adjacent
+    # Loop through each row.
     grid.each do |row|
+      # Loop through each square in the row.
       row.each do |square| 
-        if is_bomb_adjacent?(square)
-          grid[square.x][square.y] = BombAdjacent.new(square.x, square.y)
+        # Get whether the square is bomb adjacent and the squares that it is adjacent to.
+        is_adjacent, squares = is_bomb_adjacent?(square)
+        
+        # Assigns the square as `BombAdjacent` with the squares that it is adjacent to 
+        # if it is adjacent to a bomb.
+        if is_adjacent
+          grid[square.x][square.y] = BombAdjacent.new(square.x, square.y, squares)
         end
       end 
     end
@@ -126,13 +134,30 @@ class Grid
     arr.each do |coord|
       # Return true if the square is a `Bomb`.
       if grid[coord[0]][coord[1]].is_a?(Bomb)
-        return true
+        return true, squares(arr)
       end 
     end
 
     # Return false if we have not returned yet.
     return false
   end
+end
+
+
+# Gets the squares from the grid for each coordinate in the passed array.
+def squares(arr)
+  # Initialize an empty array.
+  squares_arr = []
+
+  # Loops through the coordinates array.
+  arr.each do |coord|
+    # Adds the sqaure from the grid that matches the coordinates to the squares 
+    # array.
+    squares_arr << grid[coord[0]][coord[1]]
+  end
+
+  # Returns the squares array.
+  squares_arr
 end
 
 RSpec.describe Grid do 
