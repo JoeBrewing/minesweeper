@@ -38,9 +38,11 @@ class Square
     end
   end
 
-  # Exposes the clicked instance variable to be set to true.
+  # Sets clicked to true and returns lost as false.
   def set_clicked
     @clicked = true
+
+    false
   end
 end
 
@@ -49,5 +51,31 @@ RSpec.describe Square do
     expect(Square.new(2,2).x).to eq(2)
     expect(Square.new(2,2).y).to eq(2)
     expect(Square.new(2,2).clicked).to eq(false)
+  end
+
+  it 'should set clicked' do 
+    square = Square.new(1,1)
+
+    square.set_clicked
+
+    expect(square.clicked).to eq(true)
+  end
+
+  it 'should return false for lost' do
+    square = Square.new(1,1)
+
+    expect(square.set_clicked).to eq(false)
+  end
+
+  it 'draw should return O if not clicked' do
+    expect(Square.new(1,1).draw).to eq('O')
+  end
+
+  it 'draw should return C if not clicked' do
+    square = Square.new(1,1)
+
+    square.set_clicked
+    
+    expect(square.draw).to eq('C')
   end
 end
