@@ -82,9 +82,12 @@ class Grid
     end
   end
 
+  # This method selects the passed square and returns whether or not it is a bomb.
   def select(x, y)
+    # Set clicked for the passed coordinates.
     grid[x.to_i - 1][y.to_i - 1].set_clicked
 
+    # Return whether or not the selected square is a bomb.
     grid[x.to_i - 1][y.to_i - 1].is_a?(Bomb) ? true : false
   end
 end
