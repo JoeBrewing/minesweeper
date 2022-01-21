@@ -1,6 +1,7 @@
 require 'rspec'
 require_relative 'square'
 require_relative 'bomb'
+require_relative 'bomb_adjacent'
 
 class Grid
   # A class to manage the minesweeper grid.
@@ -21,6 +22,9 @@ class Grid
 
     # Place the bombs.
     place_bombs
+    
+    # Place squares that are bomb adjacent.
+    assign_bomb_adjacent
   end
 
   # This method creates the grid to the specified height and width.
@@ -86,7 +90,48 @@ class Grid
   # This method selects the passed square and returns whether or not it is a bomb.
   def select(x, y)
     # Set clicked for the passed coordinates.
-    grid[x.to_i - 1][y.to_i - 1].set_clicked
+    grid[y.to_i - 1][x.to_i - 1].set_clicked
+  end
+
+  def assign_bomb_adjacent
+    grid.each do |row|
+      row.each do |square| 
+        if is_bomb_adjacent?(square)
+          grid[square.x][square.y] = BombAdjacent.new(square.x, square.y)
+        end
+      end 
+    end
+  end
+
+  # Checks to see if there's any bombs adjacent to the 
+  # passed square.
+  def is_bomb_adjacent?(square)
+    # Return false if the passed square is a bomb.
+    return false if square.is_a?(Bomb)
+
+    # Get all squares around the passed square that exist
+    # inside the grid.
+    arr = [
+      [square.x - 1, square.y], 
+      [square.x - 1, square.y - 1],
+      [square.x, square.y - 1], 
+      [square.x + 1, square.y - 1],
+      [square.x + 1, square.y],
+      [square.x + 1, square.y + 1],
+      [square.x, square.y + 1],
+      [square.x - 1, square.y + 1]
+    ].select{ |x,y| x >= 0 && y >= 0 && x < @width && y < @height}
+
+    # Loop through reach square.
+    arr.each do |coord|
+      # Return true if the square is a `Bomb`.
+      if grid[coord[0]][coord[1]].is_a?(Bomb)
+        return true
+      end 
+    end
+
+    # Return false if we have not returned yet.
+    return false
   end
 end
 

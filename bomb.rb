@@ -6,7 +6,7 @@ class Bomb < Square
   
   # Initialize the bomb object by just calling the super class initialize.
   def initialize(x, y)
-    super
+    super(x, y)
   end
 
   # Draw the bomb as part of the grid. Will be 'X' if clicked, otherwise it will be 'O'.
