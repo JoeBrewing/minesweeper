@@ -37,6 +37,11 @@ class Square
       'O'
     end
   end
+
+  # Exposes the clicked instance variable to be set to true.
+  def set_clicked
+    @clicked = true
+  end
 end
 
 RSpec.describe Square do

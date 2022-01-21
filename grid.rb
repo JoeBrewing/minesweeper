@@ -81,6 +81,12 @@ class Grid
       puts row.map{ |x| x.draw }.join(' | ')
     end
   end
+
+  def select(x, y)
+    grid[x.to_i - 1][y.to_i - 1].set_clicked
+
+    grid[x.to_i - 1][y.to_i - 1].is_a?(Bomb) ? true : false
+  end
 end
 
 RSpec.describe Grid do 
