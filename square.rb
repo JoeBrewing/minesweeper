@@ -1,3 +1,5 @@
+require 'rspec'
+
 class Square
   # A class to hold information for each square. Each grid square will be this 
   # class when the grid is generated. Each square will still be this if they 
@@ -25,6 +27,15 @@ class Square
   # Expose whether or not the square has been clicked.
   def clicked 
     @clicked
+  end
+
+  # Draw the square as part of the grid.
+  def draw
+    if clicked
+      'C'
+    else
+      'O'
+    end
   end
 end
 

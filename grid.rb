@@ -43,19 +43,27 @@ class Grid
     arr
   end
 
+  # Place the bombs on the grid.
   def place_bombs
     # Initialize the number of placed bombs to 0.
     placed_bombs = 0
 
+    # Loop until the number of placed bombs matches the expected number of bombs.
     while placed_bombs < @num_bombs
+      # Select a random x location.
       rand_x = rand(@width)
 
+      # Select a random y location.
       rand_y = rand(@height)
 
+      # Continue the loop if the randomly selected grid x,y location already
+      # has a bomb.
       next if @grid[rand_x][rand_y].is_a?(Bomb)
 
+      # Set the randomly selected grid x,y location as a bomb.
       @grid[rand_x][rand_y] = Bomb.new(rand_x, rand_y)
 
+      # Increment the number of set bombs.
       placed_bombs += 1
     end
   end
@@ -63,6 +71,15 @@ class Grid
   # Exposes the grid instance variable.
   def grid
     @grid
+  end
+
+  # This draws the grid
+  def draw_grid
+    # Loop through each grid row.
+    grid.each do |row|
+      # Print the row.
+      puts row.map{ |x| x.draw }.join(' | ')
+    end
   end
 end
 
@@ -91,5 +108,13 @@ RSpec.describe Grid do
     end
 
     expect(bomb_count).to eq(3)
+  end
+
+  it 'should draw the grid' do
+    grid = Grid.new(3, 3, 3)
+
+    expect do 
+      grid.draw_grid
+    end.to output("O | O | O\nO | O | O\nO | O | O\n").to_stdout
   end
 end
