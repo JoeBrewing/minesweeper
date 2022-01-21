@@ -19,6 +19,7 @@ class Grid
     # Create the grid.
     @grid = create_grid
 
+    # Place the bombs.
     place_bombs
   end
 

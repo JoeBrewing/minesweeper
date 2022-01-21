@@ -2,7 +2,9 @@ require 'rspec'
 require_relative 'square'
 
 class Bomb < Square
-  # This class handles functionality related to whether or not a square is a bomb.
+  # This class handles functionality related to bombs.
+  
+  # Initialize the bomb object by just calling the super class initialize.
   def initialize(x, y)
     super
   end
