@@ -14,7 +14,11 @@ class BombAdjacent < Square
 
   # Draw the bomb adjacent as part of the grid. Will be 'B' if clicked
   # otherwise it will be 'O'.
-  def draw 
+  def draw(cheat)
+    if cheat && !@flagged
+      return @adjacent_squares.select{ |x| x.is_a?(Bomb) }.length
+    end
+
     if @flagged
       'F'
     elsif clicked

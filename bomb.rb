@@ -10,7 +10,11 @@ class Bomb < Square
   end
 
   # Draw the bomb as part of the grid. Will be 'X' if clicked, otherwise it will be 'O'.
-  def draw
+  def draw(cheat)
+    if cheat && !@flagged
+      return 'B'
+    end
+
     if @flagged
       'F'
     elsif clicked

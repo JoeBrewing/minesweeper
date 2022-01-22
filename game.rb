@@ -40,7 +40,7 @@ class Game
       grid.draw_grid
 
       # Ask to place flag or select sqaure.
-      response = get_value('Enter (f) to place/remove a flag or (s) to select a square or (x) to exit.')
+      response = get_value('Enter (f) to place/remove a flag or (s) to select a square or (x) to exit. ***press c to enable cheat mode***')
 
       # If response is 'x' then we leave early.
       if response == 'x'
@@ -58,6 +58,10 @@ class Game
 
         # Select the square and find out whether or not the player lost.
         lost = grid.select(x, y)
+      elsif response == 'c'
+        puts 'woooow....just wow...ok then. cheater'
+
+        grid.set_cheat_mode
       end
     end
 

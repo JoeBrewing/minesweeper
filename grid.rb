@@ -31,6 +31,9 @@ class Grid
     
     # Place squares that are bomb adjacent.
     assign_bomb_adjacent
+
+    # Initialize cheat mode as false.
+    @cheat_mode = false
   end
 
   # This method creates the grid to the specified height and width.
@@ -86,10 +89,11 @@ class Grid
 
   # This draws the grid
   def draw_grid
+    puts "Cheat mode in draw grid #{@cheat_mode}"
     # Loop through each grid row.
     grid.each do |row|
       # Print the row.
-      puts row.map{ |x| x.draw }.join(' | ')
+      puts row.map{ |x| x.draw(@cheat_mode) }.join(' | ')
     end
   end
 
@@ -198,6 +202,11 @@ class Grid
   # This prints a message saying how many bombs there are left to place.
   def flags_left_message
     puts "There are #{@flag_count} flags left to place."
+  end
+
+  # This sets cheat mode to true.
+  def set_cheat_mode
+    @cheat_mode = true
   end
 end
 

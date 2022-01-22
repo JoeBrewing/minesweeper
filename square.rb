@@ -32,7 +32,7 @@ class Square
   end
 
   # Draw the square as part of the grid.
-  def draw
+  def draw(cheat)
     if @flagged
       'F'
     elsif clicked
