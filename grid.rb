@@ -69,10 +69,10 @@ class Grid
 
       # Continue the loop if the randomly selected grid x,y location already
       # has a bomb.
-      next if @grid[rand_x][rand_y].is_a?(Bomb)
+      next if @grid[rand_y][rand_x].is_a?(Bomb)
 
       # Set the randomly selected grid x,y location as a bomb.
-      @grid[rand_x][rand_y] = Bomb.new(rand_x, rand_y)
+      @grid[rand_y][rand_x] = Bomb.new(rand_x, rand_y)
 
       # Increment the number of set bombs.
       placed_bombs += 1
@@ -127,7 +127,7 @@ class Grid
     return false if @flag_count > 0
 
     # Return true if all the flagged squares are bombs. Otherwise return false.
-    return @flagged.select{ |x| !x.is_a?(Bomb) }.count > 0
+    return @flagged.select{ |x| !x.is_a?(Bomb) }.count == 0
   end
 
   # Initializes the squares that are adjacent to a bomb.
@@ -142,7 +142,7 @@ class Grid
         # Assigns the square as `BombAdjacent` with the squares that it is adjacent to 
         # if it is adjacent to a bomb.
         if is_adjacent
-          grid[square.x][square.y] = BombAdjacent.new(square.x, square.y, squares)
+          grid[square.y][square.x] = BombAdjacent.new(square.x, square.y, squares)
         end
       end 
     end
@@ -157,14 +157,14 @@ class Grid
     # Get all squares around the passed square that exist
     # inside the grid.
     arr = [
-      [square.x - 1, square.y], 
-      [square.x - 1, square.y - 1],
-      [square.x, square.y - 1], 
-      [square.x + 1, square.y - 1],
-      [square.x + 1, square.y],
-      [square.x + 1, square.y + 1],
-      [square.x, square.y + 1],
-      [square.x - 1, square.y + 1]
+      [square.y, square.x - 1], 
+      [square.y - 1, square.x - 1],
+      [square.y - 1, square.x], 
+      [square.y - 1, square.x + 1],
+      [square.y, square.x + 1],
+      [square.y + 1, square.x + 1],
+      [square.y + 1, square.x],
+      [square.y + 1, square.x - 1]
     ].select{ |x,y| x >= 0 && y >= 0 && x < @width && y < @height}
 
     # Loop through reach square.

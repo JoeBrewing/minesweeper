@@ -51,7 +51,7 @@ class Game
         x, y = get_coordinates
 
         # Flag the square and find out whether or not the player won.
-        grid.flag(x, y)
+        won = grid.flag(x, y)
       elsif response == 's'
         # Get the coordinates to select.
         x, y = get_coordinates
@@ -71,6 +71,13 @@ class Game
       grid.draw_grid
 
       puts 'You have selected a bomb. Better luck next time!'
+    end
+
+    # If the player won then print that the player has won.
+    if won  
+      grid.draw_grid
+
+      puts 'Congratulations! You won!'
     end
   end
 
