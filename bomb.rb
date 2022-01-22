@@ -11,7 +11,7 @@ class Bomb < Square
 
   # Draw the bomb as part of the grid. Will be 'X' if clicked, otherwise it will be 'O'.
   def draw(cheat)
-    if cheat && !@flagged
+    if cheat && !@flagged && !clicked
       return 'B'
     end
 
@@ -38,7 +38,7 @@ RSpec.describe Bomb do
   end
 
   it 'draw should return O if not clicked' do
-    expect(Bomb.new(1,1).draw).to eq('O')
+    expect(Bomb.new(1,1).draw(false)).to eq('O')
   end
 
   it 'draw should return X if not clicked' do
@@ -46,6 +46,6 @@ RSpec.describe Bomb do
 
     bomb.set_clicked
     
-    expect(bomb.draw).to eq('X')
+    expect(bomb.draw(false)).to eq('X')
   end
 end

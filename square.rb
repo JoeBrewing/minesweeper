@@ -81,7 +81,7 @@ RSpec.describe Square do
   end
 
   it 'draw should return O if not clicked' do
-    expect(Square.new(1,1).draw).to eq('O')
+    expect(Square.new(1,1).draw(false)).to eq('O')
   end
 
   it 'draw should return C if not clicked' do
@@ -89,6 +89,6 @@ RSpec.describe Square do
 
     square.set_clicked
     
-    expect(square.draw).to eq('C')
+    expect(square.draw(false)).to eq('C')
   end
 end

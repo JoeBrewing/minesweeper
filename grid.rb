@@ -89,7 +89,6 @@ class Grid
 
   # This draws the grid
   def draw_grid
-    puts "Cheat mode in draw grid #{@cheat_mode}"
     # Loop through each grid row.
     grid.each do |row|
       # Print the row.
