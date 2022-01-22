@@ -1,5 +1,8 @@
 # Minesweeper
 
+There's a lot that could be refactored in this. Some of the nested if/elsif should be refactored into case statements
+or utility methods. Definitely need to reduce the cycolmatic complexity.
+
 # How To Play
 - clone the project
 - cd minesweeper
