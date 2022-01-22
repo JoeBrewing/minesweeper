@@ -100,8 +100,34 @@ class Grid
   end
 
   def flag(x, y)
+    if @flag_count == 0
+      # Print that there are no more flags to place and return early.
+      puts 'There are no more flags to place. Check your current flag placements.'
+      return
+    end
+
     # Set flagged for the passed coordinates.
-    grid[y.to_i - 1][x.to_i - 1].set_flagged
+    flagged = grid[y.to_i - 1][x.to_i - 1].set_flagged
+
+    if flagged 
+      # Decrease the flag count by one.
+      @flag_count -= 1
+    else 
+      # Increase the flag count by one because a flag has been removed.
+      @flag_count += 1
+    end
+
+    # Return true if the win condition has been achieved. Otherwise return false.
+    return check_for_win_condition
+  end
+
+  # This checks to see if the game has been won.
+  def check_for_win_condition
+    # Return early if there are still flags to place.
+    return false if @flag_count > 0
+
+    # Return true if all the flagged squares are bombs. Otherwise return false.
+    return @flagged.select{ |x| !x.is_a?(Bomb) }.count > 0
   end
 
   # Initializes the squares that are adjacent to a bomb.

@@ -16,7 +16,7 @@ class Bomb < Square
     elsif clicked
       'X'
     else   
-      'O'
+      'B'
     end
   end
 

@@ -49,9 +49,13 @@ class Square
     false
   end
 
-  # Sets flagged to true.
+  # Sets flagged to the opposite of what it currently is.
   def set_flagged
-    @flagged = true
+    @flagged = !@flagged
+
+    # Return flag so it can be determined whether to add or subtract a 
+    # flag from the flag count.
+    @flagged
   end
 end
 
