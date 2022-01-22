@@ -18,4 +18,5 @@
 
 # ToDo
 - add more unit tests
+- add logic to clear out adjacent regular squares when you select a regular square
 - create a version of this with a web gui
