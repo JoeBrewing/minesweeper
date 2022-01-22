@@ -33,6 +33,9 @@ class Game
     leave = false
 
     while lost == false && won == false && leave == false do
+      # Display how many flags there are left to place.
+      grid.flags_left_message 
+
       # Draw the grid
       grid.draw_grid
 
@@ -44,8 +47,11 @@ class Game
         leave = true
       # If response if f then we ask for the flag x,y coordinates and perform flag placing logic.
       elsif response == 'f'
-        # ToDo: flag placing logic
-        puts 'place flag logic goes here'
+        # Get the coordinates to select.
+        x, y = get_coordinates
+
+        # Flag the square and find out whether or not the player won.
+        grid.flag(x, y)
       elsif response == 's'
         # Get the coordinates to select.
         x, y = get_coordinates

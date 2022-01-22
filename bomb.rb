@@ -11,7 +11,9 @@ class Bomb < Square
 
   # Draw the bomb as part of the grid. Will be 'X' if clicked, otherwise it will be 'O'.
   def draw
-    if clicked
+    if @flagged
+      'F'
+    elsif clicked
       'X'
     else   
       'O'

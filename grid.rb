@@ -22,6 +22,12 @@ class Grid
 
     # Place the bombs.
     place_bombs
+
+    # Initialize the flag count.
+    @flag_count = num_bombs
+
+    # Initialize the flagged array
+    @flagged = []
     
     # Place squares that are bomb adjacent.
     assign_bomb_adjacent
@@ -93,6 +99,11 @@ class Grid
     grid[y.to_i - 1][x.to_i - 1].set_clicked
   end
 
+  def flag(x, y)
+    # Set flagged for the passed coordinates.
+    grid[y.to_i - 1][x.to_i - 1].set_flagged
+  end
+
   # Initializes the squares that are adjacent to a bomb.
   def assign_bomb_adjacent
     # Loop through each row.
@@ -141,24 +152,29 @@ class Grid
     # Return false if we have not returned yet.
     return false
   end
-end
+  # Gets the squares from the grid for each coordinate in the passed array.
 
+  def squares(arr)
+    # Initialize an empty array.
+    squares_arr = []
 
-# Gets the squares from the grid for each coordinate in the passed array.
-def squares(arr)
-  # Initialize an empty array.
-  squares_arr = []
+    # Loops through the coordinates array.
+    arr.each do |coord|
+      # Adds the sqaure from the grid that matches the coordinates to the squares 
+      # array.
+      squares_arr << grid[coord[0]][coord[1]]
+    end
 
-  # Loops through the coordinates array.
-  arr.each do |coord|
-    # Adds the sqaure from the grid that matches the coordinates to the squares 
-    # array.
-    squares_arr << grid[coord[0]][coord[1]]
+    # Returns the squares array.
+    squares_arr
   end
 
-  # Returns the squares array.
-  squares_arr
+  # This prints a message saying how many bombs there are left to place.
+  def flags_left_message
+    puts "There are #{@flag_count} flags left to place."
+  end
 end
+
 
 RSpec.describe Grid do 
   it 'should create a grid' do

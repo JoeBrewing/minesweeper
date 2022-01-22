@@ -12,6 +12,8 @@ class Square
     @y = y
 
     @clicked = false
+
+    @flagged = false
   end
 
   # Expose the x location.
@@ -31,7 +33,9 @@ class Square
 
   # Draw the square as part of the grid.
   def draw
-    if clicked
+    if @flagged
+      'F'
+    elsif clicked
       'C'
     else
       'O'
@@ -43,6 +47,11 @@ class Square
     @clicked = true
 
     false
+  end
+
+  # Sets flagged to true.
+  def set_flagged
+    @flagged = true
   end
 end
 
